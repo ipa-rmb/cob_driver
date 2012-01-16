@@ -1018,7 +1018,3 @@ void NodeClass::UpdateOdometry()
 	// publish odometry msg
 	topic_pub_odometry_.publish(odom_top);
 }
-
-
-
-
