@@ -50,7 +50,7 @@
 * If not, see <http://www.gnu.org/licenses/>.
 *
 ****************************************************************/
-#include "../include/cob_camera_sensors/StdAfx.h" 
+#include "../../../../cob_object_perception_intern/windows/src/PreCompiledHeaders/StdAfx.h" 
 
 #ifdef __LINUX__
 #include "cob_camera_sensors/VirtualColorCam.h"
@@ -146,7 +146,7 @@ unsigned long VirtualColorCam::Open()
 	if ( !fs::exists( absoluteDirectoryName ) )
 	{
 		std::cerr << "ERROR - VirtualColorCam::Open:" << std::endl;
-		std::cerr << "\t ... Path '" << absoluteDirectoryName.file_string() << "' not found" << std::endl;
+		std::cerr << "\t ... Path '" << absoluteDirectoryName.string() << "' not found" << std::endl;
 		return (ipa_CameraSensors::RET_FAILED | ipa_CameraSensors::RET_FAILED_OPEN_FILE);
 	}
 
@@ -155,7 +155,7 @@ unsigned long VirtualColorCam::Open()
 	if ( fs::is_directory( absoluteDirectoryName ) )
 	{
 		std::cout << "INFO - VirtualColorCam::Open:" << std::endl;
-		std::cout << "\t ... Parsing directory '" << absoluteDirectoryName.directory_string() << "'" << std::endl;;
+		std::cout << "\t ... Parsing directory '" << absoluteDirectoryName.string() << "'" << std::endl;;
 	    fs::directory_iterator end_iter;
 		for ( fs::directory_iterator dir_itr( absoluteDirectoryName ); dir_itr != end_iter; ++dir_itr )
 		{
@@ -199,7 +199,7 @@ unsigned long VirtualColorCam::Open()
 	else
 	{
 		std::cerr << "ERROR - VirtualColorCam::Open:" << std::endl;
-		std::cerr << "\t .... Path '" << absoluteDirectoryName.file_string() << "' is not a directory." << std::endl;
+		std::cerr << "\t .... Path '" << absoluteDirectoryName.string() << "' is not a directory." << std::endl;
 		return ipa_CameraSensors::RET_FAILED;
 	}
 
