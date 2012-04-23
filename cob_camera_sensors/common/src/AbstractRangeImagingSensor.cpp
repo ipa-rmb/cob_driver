@@ -58,7 +58,7 @@
 #include "cob_vision_utils/GlobalDefines.h"
 #else
 #include "cob_driver/cob_camera_sensors/common/include/cob_camera_sensors/AbstractRangeImagingSensor.h"
-#include "cob_common/cob_vision_utils/common/include/cob_vision_utils/GlobalDefines.h"
+#include "cob_perception_common/cob_vision_utils/common/include/cob_vision_utils/GlobalDefines.h"
 #endif
 
 using namespace ipa_CameraSensors;
