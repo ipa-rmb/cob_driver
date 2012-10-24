@@ -17,7 +17,7 @@
   <!--depend package="polled_camera"/-->
   <!--depend package="prosilica_camera"/-->
   <!--depend package="cv_bridge"/-->
-  <!--depend package="cob_vision_utils"/-->
+  <depend package="cob_vision_utils"/>
   <!--depend package="libmesasr"/-->
   <!--depend package="nodelet"/-->
   <!--depend package="pcl"/-->
@@ -29,5 +29,9 @@
   <!--rosdep name="libdc1394-dev"/-->
   <!--rosdep name="glut"/-->
   <!--rosdep name="libusb-dev"/-->
+
+  <export>
+    <cpp cflags="-I${prefix}/common/include -I${prefix}/ros/include" lflags="-L${prefix}/common/lib -lcob_camera_sensors"/>
+  </export>
 
 </package>
