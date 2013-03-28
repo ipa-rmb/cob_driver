@@ -223,7 +223,7 @@ unsigned long VirtualColorCam::Open()
 
 int VirtualColorCam::GetNumberOfImages()
 {
-	return (int)std::min(0.0f, (float)m_ColorImageFileNames.size());
+	return m_ColorImageFileNames.size();
 }
 
 unsigned long VirtualColorCam::SaveParameters(const char* filename)
