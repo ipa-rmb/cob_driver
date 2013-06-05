@@ -51,7 +51,7 @@
 *
 ****************************************************************/
 
-#include "../include/cob_camera_sensors/StdAfx.h"
+#include "../../../../cob_object_perception_intern/windows/src/PreCompiledHeaders/StdAfx.h"
 
 #ifdef __LINUX__
 #include "cob_camera_sensors/VirtualRangeCam.h"
@@ -59,8 +59,8 @@
 #include "tinyxml.h"
 #else
 #include "cob_driver/cob_camera_sensors/common/include/cob_camera_sensors/VirtualRangeCam.h"
-#include "cob_common/cob_vision_utils/common/include/cob_vision_utils/VisionUtils.h"
-#include "cob_vision/windows/src/extern/TinyXml/tinyxml.h"
+#include "cob_perception_common/cob_vision_utils/common/include/cob_vision_utils/VisionUtils.h"
+#include "cob_object_perception_intern/windows/src/extern/TinyXml/tinyxml.h"
 #endif
 
 #include <opencv/highgui.h>
@@ -238,24 +238,33 @@ unsigned long VirtualRangeCam::Init(std::string directory, int cameraIndex)
 	return RET_OK;
 }
 
-
-inline void VirtualRangeCam::UpdateImageDimensionsOnFirstImage(std::string filename, std::string ext)
+inline void VirtualRangeCam::UpdateImageDimensionsOnFirstImage(std::string filename, int& type, std::string ext)
 {
-	if (m_ImageWidth == -1 || m_ImageHeight == -1)
+	if (m_ImageWidth == -1 || m_ImageHeight == -1 || type == -1)
 	{
-		if (ext != ".bin")
+		if (ext == ".xml")
 		{
 			IplImage* image = (IplImage*) cvLoad(filename.c_str(), 0);
 			m_ImageWidth = image->width;
 			m_ImageHeight = image->height;
+			type = cv::Mat(image).type();
 			cvReleaseImage(&image);
 		}
-		else
+		else if (ext == ".bin")
 		{
 			cv::Mat mat;
 			ipa_Utils::LoadMat(mat, filename);
 			m_ImageHeight = mat.rows;
 			m_ImageWidth = mat.cols;
+			type = mat.type();
+		}
+		else
+		{
+			cv::Mat mat;
+			mat = cv::imread(filename, -1);
+			m_ImageHeight = mat.rows;
+			m_ImageWidth = mat.cols;
+			type = mat.type();
 		}
 	}
 }
@@ -296,6 +305,11 @@ unsigned long VirtualRangeCam::Open()
 
 	m_ImageWidth = -1;
 	m_ImageHeight = -1;
+
+	m_IntensityImageType = -1;
+	m_AmplitudeImageType = -1;
+	m_RangeImageImageType = -1;
+	m_CoordinateImageType = -1;
 
 	// Create absolute filename and check if directory exists
 	fs::path absoluteDirectoryName( m_CameraDataDirectory );
@@ -344,7 +358,7 @@ unsigned long VirtualRangeCam::Open()
 							(intensityImageCounter.find(ext) == intensityImageCounter.end()) ? intensityImageCounter[ext] = 1 : intensityImageCounter[ext]++;
 							//std::cout << "VirtualRangeCam::Open(): Reading '" << filename << "\n";
 							intensityImageFileNames[ext].push_back(filename);
-							UpdateImageDimensionsOnFirstImage(filename, ext);
+							UpdateImageDimensionsOnFirstImage(filename, m_IntensityImageType, ext);
 						}
 					}
 
@@ -357,7 +371,7 @@ unsigned long VirtualRangeCam::Open()
 							(amplitudeImageCounter.find(ext) == amplitudeImageCounter.end()) ? amplitudeImageCounter[ext] = 1 : amplitudeImageCounter[ext]++;
 							//std::cout << "VirtualRangeCam::Open(): Reading '" << filename << "\n";
 							amplitudeImageFileNames[ext].push_back(filename);
-							UpdateImageDimensionsOnFirstImage(filename, ext);
+							UpdateImageDimensionsOnFirstImage(filename, m_AmplitudeImageType, ext);
 						}
 					}
 
@@ -369,7 +383,7 @@ unsigned long VirtualRangeCam::Open()
 						{
 							(coordinateImageCounter.find(ext) == coordinateImageCounter.end()) ? coordinateImageCounter[ext] = 1 : coordinateImageCounter[ext]++;
 							coordinateImageFileNames[ext].push_back(filename);
-							UpdateImageDimensionsOnFirstImage(filename, ext);
+							UpdateImageDimensionsOnFirstImage(filename, m_CoordinateImageType, ext);
 							//std::cout << "VirtualRangeCam::Open(): Reading '" << filename << "\n";
 						}
 					}
@@ -383,7 +397,7 @@ unsigned long VirtualRangeCam::Open()
 							(rangeImageCounter.find(ext) == rangeImageCounter.end()) ? rangeImageCounter[ext] = 1 : rangeImageCounter[ext]++;
 							//std::cout << "VirtualRangeCam::Open(): Reading '" << filename << "\n";
 							rangeImageFileNames[ext].push_back(filename);
-							UpdateImageDimensionsOnFirstImage(filename, ext);
+							UpdateImageDimensionsOnFirstImage(filename, m_RangeImageImageType, ext);
 						}
 					}
 				}
@@ -434,9 +448,8 @@ unsigned long VirtualRangeCam::Open()
 		}
 
 		if (coordinateImageCounter[extCoord] != 0 &&
-			((intensityImageCounter[extInt] != coordinateImageCounter[extCoord] &&
-			amplitudeImageCounter[extAmp] != coordinateImageCounter[extCoord]) ||
-			(coordinateImageCounter[extCoord] != rangeImageCounter[extRange])))
+			intensityImageCounter[extInt] != coordinateImageCounter[extCoord] &&
+			amplitudeImageCounter[extAmp] != coordinateImageCounter[extCoord])
 		{
 			std::cerr << "ERROR - VirtualRangeCam::Open:" << std::endl;
 			std::cerr << "\t ... Number of intensity, range and coordinate images must agree." << std::endl;
@@ -453,7 +466,6 @@ unsigned long VirtualRangeCam::Open()
 	else
 	{
 		std::cerr << "ERROR - VirtualRangeCam::Open():" << std::endl;
-		//std::cerr << "\t ... Path '" << absoluteDirectoryName.file_string() << "' is not a directory." << std::endl;
 		std::cerr << "\t ... Path '" << absoluteDirectoryName.string() << "' is not a directory." << std::endl;
 		return ipa_CameraSensors::RET_FAILED;
 	}

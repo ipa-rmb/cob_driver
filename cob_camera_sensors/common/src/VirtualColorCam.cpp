@@ -50,14 +50,14 @@
 * If not, see <http://www.gnu.org/licenses/>.
 *
 ****************************************************************/
-#include "../include/cob_camera_sensors/StdAfx.h" 
+#include "../../../../cob_object_perception_intern/windows/src/PreCompiledHeaders/StdAfx.h" 
 
 #ifdef __LINUX__
 #include "cob_camera_sensors/VirtualColorCam.h"
 #include "tinyxml.h"
 #else
 #include "cob_driver/cob_camera_sensors/common/include/cob_camera_sensors/VirtualColorCam.h"
-#include "cob_vision/windows/src/extern/TinyXml/tinyxml.h"
+#include "cob_object_perception_intern/windows/src/extern/TinyXml/tinyxml.h"
 #endif
 
 #include <opencv/highgui.h>
@@ -228,7 +228,7 @@ unsigned long VirtualColorCam::Open()
 
 int VirtualColorCam::GetNumberOfImages()
 {
-	return (int)std::min(0.0f, (float)m_ColorImageFileNames.size());
+	return m_ColorImageFileNames.size();
 }
 
 unsigned long VirtualColorCam::SaveParameters(const char* filename)

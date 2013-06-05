@@ -59,14 +59,14 @@
 #ifndef __IPA_ABSTRACTRANGEIMAGINGSENSOR_H__
 #define __IPA_ABSTRACTRANGEIMAGINGSENSOR_H__
 
-#include "StdAfx.h"
+#include "../../../../../cob_object_perception_intern/windows/src/PreCompiledHeaders/StdAfx.h"
 
 #ifdef __LINUX__
 	#include "cob_vision_utils/CameraSensorDefines.h"
 	#include "cob_vision_utils/CameraSensorTypes.h"
 #else
-	#include "cob_common/cob_vision_utils/common/include/cob_vision_utils/CameraSensorDefines.h"
-	#include "cob_common/cob_vision_utils/common/include/cob_vision_utils/CameraSensorTypes.h"
+	#include "cob_perception_common/cob_vision_utils/common/include/cob_vision_utils/CameraSensorDefines.h"
+	#include "cob_perception_common/cob_vision_utils/common/include/cob_vision_utils/CameraSensorTypes.h"
 #endif
 
 #include <opencv/cv.h>
@@ -156,7 +156,7 @@ public:
 	/// @throw IPA_Exception Throws an exception, if camera access failed
 	virtual unsigned long AcquireImages(cv::Mat* rangeImage = 0, cv::Mat* intensityImage = 0,
 		cv::Mat* cartesianImage = 0, bool getLatestFrame=true, bool undistort=true,
-		ipa_CameraSensors::t_ToFGrayImageType grayImageType = ipa_CameraSensors::INTENSITY_32F1) = 0;
+		ipa_CameraSensors::t_ToFGrayImageType grayImageType = ipa_CameraSensors::INTENSITY) = 0;
 
 	/// Acquires an image from SwissRanger.
 	/// This implementation is designated for people that do not use openCV image type.
@@ -172,7 +172,7 @@ public:
 	/// @return Return code.
 	virtual unsigned long AcquireImages(int widthStepRange, int widthStepGray, int widthStepCartesian, char* rangeImage=NULL, char* grayImage=NULL,
 		char* cartesianImage=NULL, bool getLatestFrame=true, bool undistort=true, 
-		ipa_CameraSensors::t_ToFGrayImageType grayImageType = ipa_CameraSensors::INTENSITY_32F1) = 0;
+		ipa_CameraSensors::t_ToFGrayImageType grayImageType = ipa_CameraSensors::INTENSITY) = 0;
 
 	/// Save camera parameters.
 	/// Saves the on-line set parameters for the range imaging camera to a file.
