@@ -64,6 +64,7 @@
 #endif
 
 #include <opencv/highgui.h>
+#include <boost/filesystem.hpp>
 
 namespace fs = boost::filesystem;
 using namespace ipa_CameraSensors;
@@ -301,7 +302,8 @@ unsigned long VirtualRangeCam::Open()
 	if ( !fs::exists( absoluteDirectoryName ) )
 	{
 		std::cerr << "ERROR - VirtualRangeCam::Open:" << std::endl;
-		std::cerr << "\t ... Path '" << absoluteDirectoryName.file_string() << "' not found" << std::endl;
+		//std::cerr << "\t ... Path '" << absoluteDirectoryName.file_string() << "' not found" << std::endl;
+		std::cerr << "\t ... Path '" << absoluteDirectoryName.string() << "' not found" << std::endl;
 		return (ipa_CameraSensors::RET_FAILED | ipa_CameraSensors::RET_FAILED_OPEN_FILE);
 	}
 
@@ -319,7 +321,8 @@ unsigned long VirtualRangeCam::Open()
 	if ( fs::exists( absoluteDirectoryName ) )
 	{
 		std::cout << "INFO - VirtualRangeCam::Open   :" << std::endl;
-		std::cout << "\t ... Parsing directory '" << absoluteDirectoryName.directory_string() << "'" << std::endl;
+		//std::cout << "\t ... Parsing directory '" << absoluteDirectoryName.directory_string() << "'" << std::endl;
+		std::cout << "\t ... Parsing directory " << std::endl;
 		
 		fs::directory_iterator end_iter;
 		for ( fs::directory_iterator dir_itr( absoluteDirectoryName ); dir_itr != end_iter; ++dir_itr )
@@ -450,7 +453,8 @@ unsigned long VirtualRangeCam::Open()
 	else
 	{
 		std::cerr << "ERROR - VirtualRangeCam::Open():" << std::endl;
-		std::cerr << "\t ... Path '" << absoluteDirectoryName.file_string() << "' is not a directory." << std::endl;
+		//std::cerr << "\t ... Path '" << absoluteDirectoryName.file_string() << "' is not a directory." << std::endl;
+		std::cerr << "\t ... Path '" << absoluteDirectoryName.string() << "' is not a directory." << std::endl;
 		return ipa_CameraSensors::RET_FAILED;
 	}
 
