@@ -376,10 +376,11 @@ unsigned long VirtualRangeCam::Open()
 					}
 
 					// coordinate image formats
-					for (unsigned int extIndex=0; extIndex<2; extIndex++)
+					for (unsigned int extIndex=0; extIndex<extensionList.size(); extIndex++)
 					{
 						std::string ext = extensionList[extIndex];
-						if ((dir_itr->path().extension() == ext) && filename.find( "RangeCamCoordinate_32F3_" + sCameraIndex, 0 ) != std::string::npos)
+						//if ((dir_itr->path().extension() == ext) && filename.find( "RangeCamCoordinate_32F3_" + sCameraIndex, 0 ) != std::string::npos)
+						if ((dir_itr->path().extension() == ext) && filename.find( "RangeCamCoordinate_8U3_" + sCameraIndex, 0 ) != std::string::npos)
 						{
 							(coordinateImageCounter.find(ext) == coordinateImageCounter.end()) ? coordinateImageCounter[ext] = 1 : coordinateImageCounter[ext]++;
 							coordinateImageFileNames[ext].push_back(filename);
@@ -566,7 +567,7 @@ unsigned long VirtualRangeCam::AcquireImages(cv::Mat* rangeImage, cv::Mat* grayI
 
 	if(grayImage)
 	{
-		if (grayImageType == ipa_CameraSensors::INTENSITY_8U3) grayImage->create(m_ImageHeight, m_ImageWidth, CV_8UC3);
+		if (grayImageType == ipa_CameraSensors::INTENSITY) grayImage->create(m_ImageHeight, m_ImageWidth, CV_8UC3);
 		else grayImage->create(m_ImageHeight, m_ImageWidth, CV_32FC1);
 		grayImageData = (char*) grayImage->data;
 		widthStepGray = grayImage->step;
@@ -667,7 +668,7 @@ unsigned long VirtualRangeCam::AcquireImages(int widthStepRange, int widthStepGr
 		bool releaseNecessary = false;
 
 		// load image
-		if ((grayImageType == ipa_CameraSensors::INTENSITY_32F1) || (grayImageType == ipa_CameraSensors::INTENSITY_8U3))
+		if ((grayImageType == ipa_CameraSensors::INTENSITY) || (grayImageType == ipa_CameraSensors::INTENSITY))
 		{
 			// intensity image
 			if (m_IntensityImageFileNames[m_ImageCounter].find(".bin") != std::string::npos)
@@ -717,7 +718,7 @@ unsigned long VirtualRangeCam::AcquireImages(int widthStepRange, int widthStepGr
 		// process image
 		if (!undistort)
 		{
-			if (grayImageType == ipa_CameraSensors::INTENSITY_8U3)
+			if (grayImageType == ipa_CameraSensors::INTENSITY)
 			{
 				for(unsigned int row=0; row<(unsigned int)m_ImageHeight; row++)
 				{
@@ -747,7 +748,7 @@ unsigned long VirtualRangeCam::AcquireImages(int widthStepRange, int widthStepGr
 		else
 		{
 			cv::Mat undistortedData;
-			if (grayImageType == ipa_CameraSensors::INTENSITY_8U3)
+			if (grayImageType == ipa_CameraSensors::INTENSITY)
 			{
 				undistortedData = cv::Mat(m_ImageHeight, m_ImageWidth, CV_8UC3, (unsigned char*) grayImageData);
 			}
