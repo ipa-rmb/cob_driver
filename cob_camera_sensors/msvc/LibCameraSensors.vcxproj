@@ -379,7 +379,7 @@ copy "$(OutDir)$(ProjectName).lib" "$(COB3_DIR)\cob_object_perception_intern\win
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"../../../../cob_object_perception_intern/windows/src/PreCompiledHeaders/StdAfx.h"</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(COB3_DIR)\cob_object_perception_intern\windows\pch\PreCompiledHeaders.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
-    <ClCompile Include="..\common\src\AxisCamVFeld.cpp">
+    <ClCompile Include="..\..\..\cob_bringup_sandbox\cob_camera_sensors_ipa\common\src\AxisCamVFeld.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"../include/cob_camera_sensors_ipa/StdAfx.h"</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"../../../../cob_object_perception_intern/windows/src/PreCompiledHeaders/StdAfx.h"</PrecompiledHeaderFile>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
@@ -397,7 +397,7 @@ copy "$(OutDir)$(ProjectName).lib" "$(COB3_DIR)\cob_object_perception_intern\win
       <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)</ObjectFileName>
       <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="..\common\src\IPCameraVFeld.cpp">
+    <ClCompile Include="..\..\..\cob_bringup_sandbox\cob_camera_sensors_ipa\common\src\IPCameraVFeld.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"../include/cob_camera_sensors_ipa/StdAfx.h"</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"../../../../cob_object_perception_intern/windows/src/PreCompiledHeaders/StdAfx.h"</PrecompiledHeaderFile>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
@@ -415,7 +415,7 @@ copy "$(OutDir)$(ProjectName).lib" "$(COB3_DIR)\cob_object_perception_intern\win
       <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)</ObjectFileName>
       <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="..\common\src\Kinect.cpp">
+    <ClCompile Include="..\..\..\cob_bringup_sandbox\cob_camera_sensors_ipa\common\src\Kinect.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"../include/cob_camera_sensors_ipa/StdAfx.h"</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"../../../../cob_object_perception_intern/windows/src/PreCompiledHeaders/StdAfx.h"</PrecompiledHeaderFile>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
@@ -445,7 +445,7 @@ copy "$(OutDir)$(ProjectName).lib" "$(COB3_DIR)\cob_object_perception_intern\win
       <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)</ObjectFileName>
       <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="..\common\src\AxisCam.cpp">
+    <ClCompile Include="..\..\..\cob_bringup_sandbox\cob_camera_sensors_ipa\common\src\AxisCam.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -463,7 +463,7 @@ copy "$(OutDir)$(ProjectName).lib" "$(COB3_DIR)\cob_object_perception_intern\win
       <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)</ObjectFileName>
       <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="..\common\src\ICCam.cpp">
+    <ClCompile Include="..\..\..\cob_bringup_sandbox\cob_camera_sensors_ipa\common\src\ICCam.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Makefile|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Makefile|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -483,7 +483,7 @@ copy "$(OutDir)$(ProjectName).lib" "$(COB3_DIR)\cob_object_perception_intern\win
       <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)</ObjectFileName>
       <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="..\common\src\IPCamera.cpp">
+    <ClCompile Include="..\..\..\cob_bringup_sandbox\cob_camera_sensors_ipa\common\src\IPCamera.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Makefile|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Makefile|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -503,7 +503,7 @@ copy "$(OutDir)$(ProjectName).lib" "$(COB3_DIR)\cob_object_perception_intern\win
       <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)</ObjectFileName>
       <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="..\common\src\OpenCVCamera.cpp">
+    <ClCompile Include="..\..\..\cob_bringup_sandbox\cob_camera_sensors_ipa\common\src\OpenCVCamera.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"../include/cob_camera_sensors_ipa/StdAfx.h"</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"../../../../cob_object_perception_intern/windows/src/PreCompiledHeaders/StdAfx.h"</PrecompiledHeaderFile>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
@@ -517,7 +517,7 @@ copy "$(OutDir)$(ProjectName).lib" "$(COB3_DIR)\cob_object_perception_intern\win
       <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)</ObjectFileName>
       <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="..\common\src\PMDCamCube.cpp">
+    <ClCompile Include="..\..\..\cob_bringup_sandbox\cob_camera_sensors_ipa\common\src\PMDCamCube.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"../include/cob_camera_sensors_ipa/StdAfx.h"</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"../../../../cob_object_perception_intern/windows/src/PreCompiledHeaders/StdAfx.h"</PrecompiledHeaderFile>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
@@ -541,44 +541,44 @@ copy "$(OutDir)$(ProjectName).lib" "$(COB3_DIR)\cob_object_perception_intern\win
     <ClInclude Include="..\..\..\cob_driver\cob_camera_sensors\common\include\cob_camera_sensors\Swissranger.h" />
     <ClInclude Include="..\..\..\cob_driver\cob_camera_sensors\common\include\cob_camera_sensors\VirtualColorCam.h" />
     <ClInclude Include="..\..\..\cob_driver\cob_camera_sensors\common\include\cob_camera_sensors\VirtualRangeCam.h" />
-    <ClInclude Include="..\common\include\cob_camera_sensors_ipa\AxisCam.h">
+    <ClInclude Include="..\..\..\cob_bringup_sandbox\cob_camera_sensors_ipa\common\include\cob_camera_sensors_ipa\AxisCam.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="..\common\include\cob_camera_sensors_ipa\AxisCamVFeld.h">
+    <ClInclude Include="..\..\..\cob_bringup_sandbox\cob_camera_sensors_ipa\common\include\cob_camera_sensors_ipa\AxisCamVFeld.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="..\common\include\cob_camera_sensors_ipa\ICCam.h">
+    <ClInclude Include="..\..\..\cob_bringup_sandbox\cob_camera_sensors_ipa\common\include\cob_camera_sensors_ipa\ICCam.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="..\common\include\cob_camera_sensors_ipa\IPCamera.h">
+    <ClInclude Include="..\..\..\cob_bringup_sandbox\cob_camera_sensors_ipa\common\include\cob_camera_sensors_ipa\IPCamera.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="..\common\include\cob_camera_sensors_ipa\IPCameraVFeld.h">
+    <ClInclude Include="..\..\..\cob_bringup_sandbox\cob_camera_sensors_ipa\common\include\cob_camera_sensors_ipa\IPCameraVFeld.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="..\common\include\cob_camera_sensors_ipa\Kinect.h" />
+    <ClInclude Include="..\..\..\cob_bringup_sandbox\cob_camera_sensors_ipa\common\include\cob_camera_sensors_ipa\Kinect.h" />
     <ClInclude Include="..\..\..\cob_object_perception_intern\windows\src\extern\MemJpegDecoder\memJpegDecoder.h" />
-    <ClInclude Include="..\common\include\cob_camera_sensors_ipa\OpenCVCamera.h" />
-    <ClInclude Include="..\common\include\cob_camera_sensors_ipa\PMDCamCube.h" />
+    <ClInclude Include="..\..\..\cob_bringup_sandbox\cob_camera_sensors_ipa\common\include\cob_camera_sensors_ipa\OpenCVCamera.h" />
+    <ClInclude Include="..\..\..\cob_bringup_sandbox\cob_camera_sensors_ipa\common\include\cob_camera_sensors_ipa\PMDCamCube.h" />
     <CustomBuildStep Include="..\..\..\..\care-o-bot\cob_driver\cob_camera_sensors\common\include\cob_camera_sensors\AVTPikeCam.h" />
-    <CustomBuildStep Include="..\common\include\cob_camera_sensors_ipa\AxisCam.h" />
+    <CustomBuildStep Include="..\..\..\cob_bringup_sandbox\cob_camera_sensors_ipa\common\include\cob_camera_sensors_ipa\AxisCam.h" />
     <ClInclude Include="..\..\..\..\care-o-bot\cob_perception_common\cob_vision_utils\common\include\cob_vision_utils\CameraSensorToolbox.h" />
-    <CustomBuildStep Include="..\common\include\cob_camera_sensors_ipa\ICCam.h">
+    <CustomBuildStep Include="..\..\..\cob_bringup_sandbox\cob_camera_sensors_ipa\common\include\cob_camera_sensors_ipa\ICCam.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Makefile|Win32'">true</ExcludedFromBuild>
@@ -586,13 +586,13 @@ copy "$(OutDir)$(ProjectName).lib" "$(COB3_DIR)\cob_object_perception_intern\win
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </CustomBuildStep>
-    <CustomBuildStep Include="..\common\include\cob_camera_sensors_ipa\IPCamera.h">
+    <CustomBuildStep Include="..\..\..\cob_bringup_sandbox\cob_camera_sensors_ipa\common\include\cob_camera_sensors_ipa\IPCamera.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Makefile|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Makefile|x64'">true</ExcludedFromBuild>
     </CustomBuildStep>
-    <CustomBuildStep Include="..\common\include\cob_camera_sensors_ipa\PMDCamCube.h" />
+    <CustomBuildStep Include="..\..\..\cob_bringup_sandbox\cob_camera_sensors_ipa\common\include\cob_camera_sensors_ipa\PMDCamCube.h" />
     <CustomBuildStep Include="..\..\..\..\care-o-bot\cob_driver\cob_camera_sensors\common\include\cob_camera_sensors\Swissranger.h" />
-    <CustomBuildStep Include="..\common\include\cob_camera_sensors_ipa\UnicapCamera.h">
+    <CustomBuildStep Include="..\..\..\cob_bringup_sandbox\cob_camera_sensors_ipa\common\include\cob_camera_sensors_ipa\UnicapCamera.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
