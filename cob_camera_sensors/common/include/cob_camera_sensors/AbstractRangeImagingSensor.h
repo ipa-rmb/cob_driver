@@ -208,6 +208,8 @@ public:
 	virtual unsigned long SetIntrinsics(cv::Mat& intrinsicMatrix,
 		cv::Mat& undistortMapX, cv::Mat& undistortMapY);
 
+	virtual unsigned long SetExtrinsics(cv::Mat& extrinsicMatrix);
+
 	/// Returns the number of images in the directory
 	/// @return The number of images in the directory
 	virtual int GetNumberOfImages() {return std::numeric_limits<int>::max();};
@@ -232,6 +234,7 @@ protected:
 	unsigned int m_BufferSize; ///< Number of images, the camera buffers internally
 
 	cv::Mat m_intrinsicMatrix;		///< Intrinsic parameters [fx 0 cx; 0 fy cy; 0 0 1]
+	cv::Mat m_extrinsicMatrix;		///< Extrinsic parameters: Translation und Rotation
 	cv::Mat m_undistortMapX;		///< The output array of x coordinates for the undistortion map
 	cv::Mat m_undistortMapY;		///< The output array of Y coordinates for the undistortion map
 
