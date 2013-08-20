@@ -134,6 +134,7 @@ class __DLL_LIBCAMERASENSORS__ VirtualColorCam : public AbstractColorCamera
 		/// @param path The camera path
 		/// @return Return code
 		unsigned long SetPathToImages(std::string path);
+		unsigned long ResetImages();
 
 };
 

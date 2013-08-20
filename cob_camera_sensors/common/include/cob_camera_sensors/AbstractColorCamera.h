@@ -202,6 +202,8 @@ class __DLL_LIBCAMERASENSORS__ AbstractColorCamera
 		/// @return Return code
 		virtual unsigned long SetPathToImages(std::string path) {return RET_OK;};
 
+		virtual unsigned long ResetImages() {return RET_OK;};
+
 		/// Destructor
 		virtual ~AbstractColorCamera();
 
