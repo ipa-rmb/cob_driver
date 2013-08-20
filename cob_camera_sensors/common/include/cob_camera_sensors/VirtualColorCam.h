@@ -121,6 +121,8 @@ class __DLL_LIBCAMERASENSORS__ VirtualColorCam : public AbstractColorCamera
 		unsigned long PrintCameraInformation();
 		unsigned long TestCamera(const char* filename);
 
+		unsigned long ResetImages();
+
 		//*******************************************************************************
 		// Camera specific functions
 		//*******************************************************************************
