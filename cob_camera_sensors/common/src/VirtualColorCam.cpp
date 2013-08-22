@@ -226,6 +226,12 @@ unsigned long VirtualColorCam::Open()
 
 }
 
+unsigned long VirtualColorCam::ResetImages()
+{ 
+	m_ColorImageFileNames.clear();
+	return RET_OK;
+}
+
 int VirtualColorCam::GetNumberOfImages()
 {
 	return m_ColorImageFileNames.size();
