@@ -50,14 +50,14 @@
 * If not, see <http://www.gnu.org/licenses/>.
 *
 ****************************************************************/
-#include "../include/cob_camera_sensors/StdAfx.h" 
+#include "../../../../cob_object_perception_intern/windows/src/PreCompiledHeaders/StdAfx.h" 
 
 #ifdef __LINUX__
 #include "cob_camera_sensors/VirtualColorCam.h"
 #include "tinyxml.h"
 #else
 #include "cob_driver/cob_camera_sensors/common/include/cob_camera_sensors/VirtualColorCam.h"
-#include "cob_vision/windows/src/extern/TinyXml/tinyxml.h"
+#include "cob_object_perception_intern/windows/src/extern/TinyXml/tinyxml.h"
 #endif
 
 #include <opencv/highgui.h>
@@ -146,7 +146,7 @@ unsigned long VirtualColorCam::Open()
 	if ( !fs::exists( absoluteDirectoryName ) )
 	{
 		std::cerr << "ERROR - VirtualColorCam::Open:" << std::endl;
-		std::cerr << "\t ... Path '" << absoluteDirectoryName.file_string() << "' not found" << std::endl;
+		std::cerr << "\t ... Path '" << absoluteDirectoryName.string() << "' not found" << std::endl;
 		return (ipa_CameraSensors::RET_FAILED | ipa_CameraSensors::RET_FAILED_OPEN_FILE);
 	}
 
@@ -155,7 +155,7 @@ unsigned long VirtualColorCam::Open()
 	if ( fs::is_directory( absoluteDirectoryName ) )
 	{
 		std::cout << "INFO - VirtualColorCam::Open:" << std::endl;
-		std::cout << "\t ... Parsing directory '" << absoluteDirectoryName.directory_string() << "'" << std::endl;;
+		std::cout << "\t ... Parsing directory '" << absoluteDirectoryName.string() << "'" << std::endl;;
 	    fs::directory_iterator end_iter;
 		for ( fs::directory_iterator dir_itr( absoluteDirectoryName ); dir_itr != end_iter; ++dir_itr )
 		{
@@ -199,7 +199,7 @@ unsigned long VirtualColorCam::Open()
 	else
 	{
 		std::cerr << "ERROR - VirtualColorCam::Open:" << std::endl;
-		std::cerr << "\t .... Path '" << absoluteDirectoryName.file_string() << "' is not a directory." << std::endl;
+		std::cerr << "\t .... Path '" << absoluteDirectoryName.string() << "' is not a directory." << std::endl;
 		return ipa_CameraSensors::RET_FAILED;
 	}
 
@@ -221,9 +221,15 @@ unsigned long VirtualColorCam::Open()
 
 }
 
+unsigned long VirtualColorCam::ResetImages()
+{ 
+	m_ColorImageFileNames.clear();
+	return RET_OK;
+}
+
 int VirtualColorCam::GetNumberOfImages()
 {
-	return (int)std::min(0.0f, (float)m_ColorImageFileNames.size());
+	return m_ColorImageFileNames.size();
 }
 
 unsigned long VirtualColorCam::SaveParameters(const char* filename)
