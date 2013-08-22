@@ -28,5 +28,6 @@
   <depend stack="robot_model" /> <!-- urdf -->
   <depend stack="ros" />
   <depend stack="ros_comm" /> <!-- rospy, rostest, std_msgs, roscpp, message_filters -->
-
+  <depend stack="boost" />
+  <depend stack="ros_comm" /> <!-- rospy, rostest, std_msgs, roscpp, message_filters -->
 </stack>

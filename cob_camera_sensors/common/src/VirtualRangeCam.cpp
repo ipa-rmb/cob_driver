@@ -64,6 +64,7 @@
 #endif
 
 #include <opencv/highgui.h>
+#include <boost/filesystem.hpp>
 
 namespace fs = boost::filesystem;
 using namespace ipa_CameraSensors;
@@ -332,7 +333,7 @@ unsigned long VirtualRangeCam::Open()
 	// Extract all image filenames from the directory
 	if ( fs::exists( absoluteDirectoryName ) )
 	{
-		std::cout << "INFO - VirtualRangeCam::Open:" << std::endl;
+		std::cout << "INFO - VirtualRangeCam::Open   :" << std::endl;
 		std::cout << "\t ... Parsing directory '" << absoluteDirectoryName.string() << "'" << std::endl;
 		
 		fs::directory_iterator end_iter;

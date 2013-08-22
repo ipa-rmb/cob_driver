@@ -14,7 +14,7 @@ rosbuild_init()
 #set the default path for built executables to the "bin" directory
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/ros/bin)
 #set the default path for built libraries to the "lib" directory
-set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
+set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/common/lib)
 
 #uncomment if you have defined messages
 #rosbuild_genmsg()
@@ -30,12 +30,12 @@ rosbuild_gensrv()
 #target_link_libraries(example ${PROJECT_NAME})
 
 # add project libraries
-#rosbuild_add_library(cob_camera_sensors	common/src/AVTPikeCam.cpp
-#					common/src/AbstractColorCamera.cpp
-#					common/src/AbstractRangeImagingSensor.cpp
-#					common/src/VirtualColorCam.cpp
-#					common/src/VirtualRangeCam.cpp
-#					common/src/Swissranger.cpp)
+rosbuild_add_library(cob_camera_sensors	common/src/AbstractColorCamera.cpp
+					common/src/AbstractRangeImagingSensor.cpp
+					common/src/VirtualColorCam.cpp
+					common/src/VirtualRangeCam.cpp)
+#					common/src/Swissranger.cpp
+#					common/src/AVTPikeCam.cpp
 #rosbuild_add_library(cob_kinect_image_flip ros/src/kinect_image_flip.cpp)
 #add_custom_command(TARGET cob_kinect_image_flip POST_BUILD COMMAND mkdir -p ${PROJECT_SOURCE_DIR}/ros/lib/)
 #add_custom_command(TARGET cob_kinect_image_flip POST_BUILD COMMAND mv ${LIBRARY_OUTPUT_PATH}/libcob_kinect_image_flip.so ${PROJECT_SOURCE_DIR}/ros/lib/)
@@ -52,11 +52,8 @@ INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/common/include)
 #rosbuild_add_executable(all_camera_viewer ros/src/all_camera_viewer.cpp)
 #rosbuild_add_executable(undistort_tof ros/src/undistort_tof.cpp)
 
-# add include search paths
-#INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/common/include)
-
 # add compile flag
-#rosbuild_add_compile_flags(cob_camera_sensors -D__LINUX__ -D__COB_ROS__)
+rosbuild_add_compile_flags(cob_camera_sensors -D__LINUX__ -D__COB_ROS__)
 #rosbuild_add_compile_flags(tof_camera -D__LINUX__ -D__COB_ROS__)
 #rosbuild_add_compile_flags(tof_camera_viewer -D__LINUX__ -D__COB_ROS__)
 #rosbuild_add_compile_flags(color_camera -D__LINUX__ -D__COB_ROS__)
@@ -64,6 +61,7 @@ INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/common/include)
 #rosbuild_add_compile_flags(all_camera_viewer -D__LINUX__ -D__COB_ROS__ -D__ROS_1_1__)
 
 # link libraries
+target_link_libraries(cob_camera_sensors tinyxml)
 #target_link_libraries(cob_camera_sensors mesasr dc1394 tinyxml)
 #target_link_libraries(tof_camera cob_camera_sensors usb)
 #target_link_libraries(tof_camera_viewer cob_camera_sensors)
