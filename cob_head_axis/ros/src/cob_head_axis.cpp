@@ -75,6 +75,8 @@
 // external includes
 #include <cob_camera_axis/ElmoCtrl.h>
 
+#include <unistd.h>
+
 //####################
 //#### node class ####
 class NodeClass
@@ -435,7 +437,7 @@ class NodeClass
 						//feedback_.isMoving = false;
 				
 						ROS_DEBUG("next point is %d from %d",traj_point_nr_,traj_.points.size());
-					
+						
 						if (traj_point_nr_ < traj_.points.size())
 						{
 							// if axis is not moving and not reached last point of trajectory, then send new target point
@@ -449,7 +451,7 @@ class NodeClass
 							//feedback_.pointNr = traj_point_nr;
 							//as_.publishFeedback(feedback_);
 						}
-						else if ( fabs( ActualPos_ - GoalPos_ ) < 0.5*M_PI/180.0 && !finished_ )
+						else if ( fabs( fabs(ActualPos_) - fabs(GoalPos_) ) < 0.5*M_PI/180.0 && !finished_ )
 						{
 							ROS_DEBUG("...reached end of trajectory");
 							finished_ = true;
@@ -461,7 +463,7 @@ class NodeClass
 					}
 					else
 					{
-						ROS_INFO("...axis still moving to point[%d]",traj_point_nr_);
+						ROS_DEBUG("...axis still moving to point[%d]",traj_point_nr_);
 					}
 				}
 				else if (operationMode_ == "velocity")
@@ -481,7 +483,10 @@ class NodeClass
 	
 	void publishJointState()
 	{
-		if (isInitialized_ == true) {			
+
+		if (isInitialized_ == true) {
+			isError_ = CamAxis_->isError();
+
 			// create message
 			int DOF = 1;
 
@@ -489,15 +494,21 @@ class NodeClass
 			CamAxis_->getGearPosVelRadS(&ActualPos_,&ActualVel_);
 			CamAxis_->m_Joint->requestPosVel();
 
+			// really bad hack
+			ActualPos_ = HomingDir_ * ActualPos_;
+			ActualVel_ = HomingDir_ * ActualVel_;
+
 			sensor_msgs::JointState msg;
 			msg.header.stamp = ros::Time::now();
 			msg.name.resize(DOF);
 			msg.position.resize(DOF);
 			msg.velocity.resize(DOF);
+			msg.effort.resize(DOF);
 			
 			msg.name[0] = JointName_;
 			msg.position[0] = ActualPos_;
 			msg.velocity[0] = ActualVel_;
+			msg.effort[0] = 0.0;
 
 
 			//std::cout << "Joint " << msg.name[0] <<": pos="<<  msg.position[0] << " vel=" << msg.velocity[0] << std::endl;
@@ -536,8 +547,8 @@ class NodeClass
 	    if(isError_)
 	    {
 	      diagnostics.status[0].level = 2;
-	      diagnostics.status[0].name = "head_axis";
-	      diagnostics.status[0].message = "one or more drives are in Error mode";
+	      diagnostics.status[0].name = n_.getNamespace();
+	      diagnostics.status[0].message = "drive is in error mode";
 	    }
 	    else
 	    {

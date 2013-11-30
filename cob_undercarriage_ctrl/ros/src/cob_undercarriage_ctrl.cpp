@@ -72,11 +72,6 @@
 #include <cob_relayboard/EmergencyStopState.h>
 #include <pr2_controllers_msgs/JointTrajectoryControllerState.h>
 
-
-// ROS service includes
-#include <cob_srvs/Trigger.h>
-#include <cob_base_drive_chain/GetJointState.h>
-
 // external includes
 #include <cob_undercarriage_ctrl/UndercarriageCtrlGeom.h>
 #include <cob_utilities/IniFile.h>
@@ -105,29 +100,21 @@ class NodeClass
 		//subscribe to JointStates topic
 		//ros::Subscriber topic_sub_joint_states_;
 		ros::Subscriber topic_sub_joint_controller_states_;
-        
-		// service servers
-		ros::ServiceServer srvServer_IsMoving;
-            
+
 		// diagnostic stuff
 		diagnostic_updater::Updater updater_;
 
-        // service clients
-        ros::ServiceClient srv_client_get_joint_state_;	// get current configuration of undercarriage
-
 		// controller Timer
         ros::Timer timer_ctrl_step_;
-
 
         // member variables
 		UndercarriageCtrlGeom * ucar_ctrl_;	// instantiate undercarriage controller
 		std::string sIniDirectory;
 		bool is_initialized_bool_;			// flag wether node is already up and running
-		bool is_moving_;					// flag wether base is moving or not
 		int drive_chain_diagnostic_;		// flag whether base drive chain is operating normal 
 		ros::Time last_time_;				// time Stamp for last odometry measurement
 		ros::Time joint_state_odom_stamp_;	// time stamp of joint states used for current odometry calc
-		double sample_time_;
+		double sample_time_, timeout_;
 		double x_rob_m_, y_rob_m_, theta_rob_rad_; // accumulated motion of robot since startup
     	int iwatchdog_;
     	double 	vel_x_rob_last_, vel_y_rob_last_, vel_theta_rob_last_; //save velocities for better odom calculation
@@ -141,7 +128,6 @@ class NodeClass
         {
 			// initialization of variables
 			is_initialized_bool_ = false;
-			is_moving_ = false;
 			iwatchdog_ = 0;
 			last_time_ = ros::Time::now();
 			sample_time_ = 0.020;
@@ -155,6 +141,23 @@ class NodeClass
 			drive_chain_diagnostic_ = diagnostic_status_lookup_.OK; //WARN; <- THATS FOR DEBUGGING ONLY!
 			
 			// Parameters are set within the launch file
+			// read in timeout for watchdog stopping the controller.
+			if (n.hasParam("timeout"))
+			{
+			  n.getParam("timeout", timeout_);
+			  ROS_INFO("Timeout loaded from Parameter-Server is: %fs", timeout_);
+			}
+			else
+			{
+			  ROS_WARN("No parameter timeout on Parameter-Server. Using default: 1.0s");
+			  timeout_ = 1.0;
+			}
+			if ( timeout_ < sample_time_ )
+			{
+			  ROS_WARN("Specified timeout < sample_time. Setting timeout to sample_time = %fs", sample_time_);
+			  timeout_ = sample_time_;
+			}
+			
 			// Read number of drives from iniFile and pass IniDirectory to CobPlatfCtrl.
 			if (n.hasParam("IniDirectory"))
 			{
@@ -194,12 +197,6 @@ class NodeClass
 			// diagnostics
 			updater_.setHardwareID(ros::this_node::getName());
 			updater_.add("initialization", this, &NodeClass::diag_init);
-
-            // implementation of service servers
-            srvServer_IsMoving = n.advertiseService("is_moving", &NodeClass::srvCallback_IsMoving, this);
-
-			// implementation of service clients
-            srv_client_get_joint_state_ = n.serviceClient<cob_base_drive_chain::GetJointState>("GetJointState");
             
             //set up timer to cyclically call controller-step
             timer_ctrl_step_ = n.createTimer(ros::Duration(sample_time_), &NodeClass::timerCallbackCtrlStep, this);
@@ -353,24 +350,11 @@ class NodeClass
 			}
 		}
 
-
-
-        // service callback functions
-        // function will be called when a service is querried
-        bool srvCallback_IsMoving(cob_srvs::Trigger::Request &req,
-							  	cob_srvs::Trigger::Response &res )
-		{
-			ROS_DEBUG("Service Callback is_moving");
-			res.success.data = is_moving_;
-			return true;
-		}
-
 		void topicCallbackJointControllerStates(const pr2_controllers_msgs::JointTrajectoryControllerState::ConstPtr& msg) {
 			int num_joints;
 			int iter_k, iter_j;
 			std::vector<double> drive_joint_ang_rad, drive_joint_vel_rads, drive_joint_effort_NM;
 			std::vector<double> steer_joint_ang_rad, steer_joint_vel_rads, steer_joint_effort_NM;
-			cob_base_drive_chain::GetJointState srv_get_joint;
 	
 			joint_state_odom_stamp_ = msg->header.stamp;
 	
@@ -560,7 +544,7 @@ void NodeClass::CalcCtrlStep()
 		k = 0;
 		for(int i = 0; i<m_iNumJoints; i++)
 		{
-			if(iwatchdog_ < 50)
+			if(iwatchdog_ < (int) std::floor(timeout_/sample_time_) )
 			{
 				// for steering motors
 				if( i == 1 || i == 3 || i == 5 || i == 7) // ToDo: specify this via the Msg
@@ -686,15 +670,6 @@ void NodeClass::UpdateOdometry()
     odom_top.twist.twist.angular.z = rot_rob_rads;
     for(int i = 0; i < 6; i++)
       odom_top.twist.covariance[6*i+i] = 0.1;
-	
-	if (fabs(vel_x_rob_ms) > 0.005 or fabs(vel_y_rob_ms) > 0.005 or fabs(rot_rob_rads) > 0.005)
-	{
-		is_moving_ = true;
-	}
-	else
-	{
-		is_moving_ = false;
-	}
 
 	// publish the transform (for debugging, conflicts with robot-pose-ekf)
 	tf_broadcast_odometry_.sendTransform(odom_tf);
