@@ -1,0 +1,15 @@
+frequency: 30                       #nodes update frequency in hz
+update_mode: event                  #switch between poll and event driven processing [polling, event]
+
+boards:                             
+  ifk_toolchanger:                  #phidget board with a name
+    serial_num: 272849              #phidget boards serial number
+    ratiometric: true
+    sensors:                        #configured sensors of this board
+       tool_changer_pin2:           #a sensor and name (URI) with which the Information will be published
+        type: digital_out           #type of the sensor [digital_out, digital_in, analog]
+        index: 0                    #port on which the information is physically connected to the phidget board
+      tool_changer_pin4:
+        type: digital_out
+        index: 1
+

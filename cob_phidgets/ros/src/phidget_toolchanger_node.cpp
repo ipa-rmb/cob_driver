@@ -114,8 +114,6 @@ int main(int argc, char **argv)
 	auto devices = manager->getAttachedDevices();
 	delete manager;
 
-	CPhidgetInterfaceKit_setOutputState();
-
 	//set the update method
 	PhidgetIK::SensingMode sensMode;
 	if(update_mode == "event")
