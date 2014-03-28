@@ -254,7 +254,7 @@ public:
 		ntoh(tc_);
 		//print(tc_);
 
-		if(tc_.size*2+JUNK_SIZE>(int)max_size) {std::cout<<"inv4"<<std::endl;return false;}
+		if(tc_.size*2+JUNK_SIZE>(int)max_size) {/*std::cout<<"inv4"<<std::endl;*/return false;}
 
 		TELEGRAM_TAIL tt = *((TELEGRAM_TAIL*) (buffer+(2*tc_.size+JUNK_SIZE-sizeof(TELEGRAM_TAIL))) );
 		ntoh(tt);
