@@ -54,4 +54,8 @@ rosbuild_add_executable(phidget_sensors ros/src/phidget_sensors_node.cpp ros/src
 						common/src/phidget.cpp common/src/phidgetik.cpp ros/src/phidgetik_ros.cpp)
 target_link_libraries(phidget_sensors phidget21)
 
+rosbuild_add_executable(phidget_toolchanger ros/src/phidget_toolchanger_node.cpp ros/src/phidget_manager.cpp 
+						common/src/phidget.cpp common/src/phidgetik.cpp ros/src/phidgetik_ros.cpp)
+target_link_libraries(phidget_toolchanger phidget21)
+
 list( APPEND CMAKE_CXX_FLAGS "-std=c++0x ${CMAKE_CXX_FLAGS} -g -ftest-coverage -fprofile-arcs" )
