@@ -68,6 +68,7 @@ FootprintObserver::FootprintObserver() :
   
   // advertise service
   srv_get_footprint_ = nh_.advertiseService("/get_footprint", &FootprintObserver::getFootprintCB, this);
+  srv_update_footprint_ = nh_.advertiseService("/update_footprint", &FootprintObserver::updateFootprintCB, this);
 
   // read footprint_source parameter
   std::string footprint_source; 
@@ -121,6 +122,25 @@ bool FootprintObserver::getFootprintCB(cob_footprint_observer::GetFootprint::Req
 
   return true;
 }
+
+bool FootprintObserver::updateFootprintCB(std_srvs::Empty::Request &req, std_srvs::Empty::Response &resp)
+{
+  // read footprint_source parameter
+  std::string footprint_source; 
+  if(!nh_.hasParam("footprint_source")) ROS_WARN("Checking default location (/local_costmap_node/costmap) for initial footprint parameter.");
+  nh_.param("footprint_source", footprint_source, std::string("/local_costmap_node/costmap"));
+ 
+  // node handle to get footprint from parameter server
+  ros::NodeHandle footprint_source_nh_(footprint_source); 
+
+  // load the robot footprint from the parameter server if its available in the local costmap namespace
+  robot_footprint_ = loadRobotFootprint(footprint_source_nh_);
+  if(robot_footprint_.size() > 4) 
+    ROS_WARN("You have set more than 4 points as robot_footprint, cob_footprint_observer can deal only with rectangular footprints so far!");
+
+  return true;
+}
+
 
 // load robot footprint from costmap_2d_ros to keep same footprint format
 std::vector<geometry_msgs::Point> FootprintObserver::loadRobotFootprint(ros::NodeHandle node){

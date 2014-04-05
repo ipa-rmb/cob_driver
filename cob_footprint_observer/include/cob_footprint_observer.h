@@ -75,6 +75,7 @@
 #include <boost/algorithm/string.hpp>
 
 #include <cob_footprint_observer/GetFootprint.h>
+#include <std_srvs/Empty.h>
 ///
 /// @class FootprintObserver
 /// @brief checks the footprint of care-o-bot and advertises a service to get the adjusted footprint
@@ -104,11 +105,13 @@ class FootprintObserver
     /// @return service call successfull
     ///
     bool getFootprintCB(cob_footprint_observer::GetFootprint::Request &req, cob_footprint_observer::GetFootprint::Response &resp);
+    bool updateFootprintCB(std_srvs::Empty::Request &req, std_srvs::Empty::Response &resp);
 
     // public members
     ros::NodeHandle nh_;
     ros::Publisher topic_pub_footprint_;
     ros::ServiceServer srv_get_footprint_;
+    ros::ServiceServer srv_update_footprint_;
 
   private:
     ///
