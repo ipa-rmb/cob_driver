@@ -56,15 +56,16 @@
 #ifdef __LINUX__
 #include "cob_camera_sensors/VirtualRangeCam.h"
 #include "cob_vision_utils/VisionUtils.h"
+
 #include "tinyxml.h"
+#include <opencv/highgui.h>
+#include <boost/filesystem.hpp>
 #else
 #include "cob_driver/cob_camera_sensors/common/include/cob_camera_sensors/VirtualRangeCam.h"
 #include "cob_perception_common/cob_vision_utils/common/include/cob_vision_utils/VisionUtils.h"
-#include "cob_object_perception_intern/windows/src/extern/TinyXml/tinyxml.h"
 #endif
 
-#include <opencv/highgui.h>
-#include <boost/filesystem.hpp>
+
 
 namespace fs = boost::filesystem;
 using namespace ipa_CameraSensors;
@@ -941,6 +942,15 @@ int VirtualRangeCam::GetNumberOfImages()
 	if (m_CoordinateImageFileNames.size() != 0) min = (int)std::min((float)min, (float)m_CoordinateImageFileNames.size());
 
 	return min;
+}
+
+unsigned long VirtualRangeCam::ResetImages() 
+{
+	m_IntensityImageFileNames.clear();
+	m_AmplitudeImageFileNames.clear();
+	m_RangeImageFileNames.clear();
+	m_CoordinateImageFileNames.clear();
+	return ipa_Utils::RET_OK;
 }
 
 unsigned long VirtualRangeCam::SetPathToImages(std::string path) 

@@ -59,8 +59,6 @@
 #ifndef __IPA_ABSTRACTCOLORCAMERA_H__
 #define __IPA_ABSTRACTCOLORCAMERA_H__
 
-#include "../../../../../cob_object_perception_intern/windows/src/PreCompiledHeaders/StdAfx.h"
-
 #ifdef __LINUX__
 	#include "cob_vision_utils/CameraSensorDefines.h"
 	#include "cob_vision_utils/CameraSensorTypes.h"
@@ -71,7 +69,8 @@
 
 #include <boost/shared_ptr.hpp>
 #include <sstream>
-#include <opencv/cv.h>
+
+//#include <opencv2/core/core.hpp>
 
 namespace ipa_CameraSensors {
 

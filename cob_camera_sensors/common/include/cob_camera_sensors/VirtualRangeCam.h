@@ -59,8 +59,6 @@
 #ifndef __IPA_VIRTUALRANGECAM_H__
 #define __IPA_VIRTUALRANGECAM_H__
 
-#include "../../../../../cob_object_perception_intern/windows/src/PreCompiledHeaders/StdAfx.h"
-
 #ifdef __LINUX__
 	#include <cob_camera_sensors/AbstractRangeImagingSensor.h>
 #else
@@ -116,6 +114,8 @@ public:
 
 	bool isInitialized() {return m_initialized;}
 	bool isOpen() {return m_open;}
+
+	unsigned long ResetImages();
 
 	/// Returns the number of images in the directory
 	/// @return The number of images in the directory

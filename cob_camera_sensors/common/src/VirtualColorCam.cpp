@@ -54,16 +54,14 @@
 
 #ifdef __LINUX__
 #include "cob_camera_sensors/VirtualColorCam.h"
-#include "tinyxml.h"
-#else
-#include "cob_driver/cob_camera_sensors/common/include/cob_camera_sensors/VirtualColorCam.h"
-#include "cob_object_perception_intern/windows/src/extern/TinyXml/tinyxml.h"
-#endif
 
+#include "tinyxml.h"
 #include <opencv/highgui.h>
 #include <iostream>
 #include <boost/filesystem.hpp>
-
+#else
+#include "cob_driver/cob_camera_sensors/common/include/cob_camera_sensors/VirtualColorCam.h"
+#endif
 
 namespace fs = boost::filesystem;
 using namespace ipa_CameraSensors;
