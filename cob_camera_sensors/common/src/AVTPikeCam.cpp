@@ -430,7 +430,7 @@ unsigned long AVTPikeCam::Close()
 
 	
 #endif
-
+	FGExitModule();
 	m_open = false;
 	return RET_OK;
 } 
