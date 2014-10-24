@@ -58,7 +58,6 @@
 #else
 	#include "cob_driver/cob_camera_sensors/common/include/cob_camera_sensors/Swissranger.h"
 	#include "cob_perception_common/cob_vision_utils/common/include/cob_vision_utils/VisionUtils.h"
-	#include "cob_object_perception_intern/windows/src/extern/TinyXml/tinyxml.h"
 #endif
 
 using namespace ipa_CameraSensors;

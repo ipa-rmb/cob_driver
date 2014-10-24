@@ -59,7 +59,6 @@
 #ifndef __IPA_ABSTRACTRANGEIMAGINGSENSOR_H__
 #define __IPA_ABSTRACTRANGEIMAGINGSENSOR_H__
 
-#include "../../../../../cob_object_perception_intern/windows/src/PreCompiledHeaders/StdAfx.h"
 
 #ifdef __LINUX__
 	#include "cob_vision_utils/CameraSensorDefines.h"
@@ -69,7 +68,7 @@
 	#include "cob_perception_common/cob_vision_utils/common/include/cob_vision_utils/CameraSensorTypes.h"
 #endif
 
-#include <opencv/cv.h>
+#include <opencv2/core/core.hpp>
 
 #include <iostream>
 #include <limits>
@@ -219,6 +218,8 @@ public:
 	/// @param path The camera path
 	/// @return Return code
 	virtual unsigned long SetPathToImages(std::string path);
+
+	virtual unsigned long ResetImages() {return RET_OK;};
 
 	unsigned int m_ImageCounter; ///< Holds the index of the image that is extracted during the next call of <code>AcquireImages</code>
 

@@ -61,7 +61,6 @@
 #ifndef __IPA_SWISSRANGER_H__
 #define __IPA_SWISSRANGER_H__
 
-#include "../../../../../cob_object_perception_intern/windows/src/PreCompiledHeaders/StdAfx.h"
 
 // Windows
 #ifdef _WIN32

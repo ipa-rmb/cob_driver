@@ -207,7 +207,7 @@ copy "$(OutDir)$(ProjectName)D.lib" "$(COB3_DIR)\cob_object_perception_intern\wi
       </Command>
     </CustomBuildStep>
     <ClCompile>
-      <AdditionalOptions>/wd4996 /wd4181 /Zm149 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/wd4996 /wd4181 /Zm233 %(AdditionalOptions)</AdditionalOptions>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_WIN32;_WIN64;_DEBUG;__LIBCAMERASENSORS_EXPORT__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -284,8 +284,8 @@ copy "$(OutDir)$(ProjectName).lib" "$(COB3_DIR)\cob_object_perception_intern\win
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalOptions>/wd4996 /wd4181 /Zm149 %(AdditionalOptions)</AdditionalOptions>
-      <Optimization>Full</Optimization>
+      <AdditionalOptions>/wd4996 /wd4181 /Zm233 %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <AdditionalIncludeDirectories>$(OPENNI2_INCLUDE64);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_WIN64;_WIN32;NDEBUG;__LIBCAMERASENSORS_EXPORT__;__USE_AVTPIKECAM__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -301,6 +301,10 @@ copy "$(OutDir)$(ProjectName).lib" "$(COB3_DIR)\cob_object_perception_intern\win
       <PrecompiledHeaderOutputFile>
       </PrecompiledHeaderOutputFile>
       <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <OmitFramePointers>true</OmitFramePointers>
     </ClCompile>
     <ProjectReference>
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
@@ -311,7 +315,7 @@ copy "$(OutDir)$(ProjectName).lib" "$(COB3_DIR)\cob_object_perception_intern\win
       <AdditionalLibraryDirectories>$(OPENNI2_LIB64);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <DataExecutionPrevention>
       </DataExecutionPrevention>
@@ -329,7 +333,7 @@ copy "$(OutDir)$(ProjectName).lib" "$(COB3_DIR)\cob_object_perception_intern\win
   <ItemGroup>
     <ClCompile Include="..\..\..\cob_perception_common\cob_vision_utils\common\src\CameraSensorToolbox.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)/PCH/cob_vision_utils/$(TargetName).pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(COB3_DIR)\cob_object_perception_intern\windows\pch\PreCompiledHeadersD.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)/PCH/cob_vision_utils/$(TargetName).pch</PrecompiledHeaderOutputFile>
@@ -337,7 +341,7 @@ copy "$(OutDir)$(ProjectName).lib" "$(COB3_DIR)\cob_object_perception_intern\win
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"../include/cob_vision_utils/StdAfx.h"</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"../../../../cob_object_perception_intern/windows/src/PreCompiledHeaders/StdAfx.h"</PrecompiledHeaderFile>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"../include/cob_vision_utils/StdAfx.h"</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"../../../../cob_object_perception_intern/windows/src/PreCompiledHeaders/StdAfx.h"</PrecompiledHeaderFile>
     </ClCompile>

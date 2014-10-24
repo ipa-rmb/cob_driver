@@ -60,7 +60,6 @@
 #ifndef __IPA_VIRTUALCOLORCAM_H__
 #define __IPA_VIRTUALCOLORCAM_H__
 
-#include "../../../../../cob_object_perception_intern/windows/src/PreCompiledHeaders/StdAfx.h"
 #ifdef __LINUX__
 	#include "cob_camera_sensors/AbstractColorCamera.h"
 #else

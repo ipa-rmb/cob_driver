@@ -9,7 +9,7 @@
  *
  * Project name: care-o-bot
  * ROS stack name: cob3_driver
- * ROS package name: cob_camera_axis
+ * ROS package name: cob_head_axis
  *								
  * +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
  *			
@@ -50,9 +50,10 @@
  ****************************************************************/
 
 
-#include <cob_camera_axis/ElmoCtrl.h>
-
+#include <cob_head_axis/ElmoCtrl.h>
+#include <unistd.h>
 #include <iostream>
+#include <unistd.h>
 
 using namespace std;
 
@@ -132,11 +133,11 @@ int ElmoCtrl::evalCanBuffer() {
 	// as long as there is something in the can buffer -> read out next message
 	while(m_CanCtrl->receiveMsg(&m_CanMsgRec) == true) {
 		bRet = false;
-		// check if the message belongs to camera_axis motor
+		// check if the message belongs to head_axis motor
 		bRet |= m_Joint->evalReceivedMsg(m_CanMsgRec);
 
 		if (bRet == true) {
-		} else std::cout << "cob_camera_axis: Unknown CAN-msg: " << m_CanMsgRec.m_iID << "  " << (int)m_CanMsgRec.getAt(0) << " " << (int)m_CanMsgRec.getAt(1) << std::endl;
+		} else std::cout << "cob_head_axis: Unknown CAN-msg: " << m_CanMsgRec.m_iID << "  " << (int)m_CanMsgRec.getAt(0) << " " << (int)m_CanMsgRec.getAt(1) << std::endl;
 	}
 	
 	//pthread_mutex_unlock(&(m_Mutex));
@@ -410,6 +411,11 @@ bool ElmoCtrl::SetMotionCtrlType(int type)
 int ElmoCtrl::GetMotionCtrlType() 
 {
 	return m_MotionCtrlType;
+}
+
+bool ElmoCtrl::isError() 
+{
+	return m_Joint->isError();
 }
 
 int ElmoCtrl::getGearPosVelRadS( double* pdAngleGearRad, double* pdVelGearRadS)
