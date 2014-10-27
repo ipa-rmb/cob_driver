@@ -79,7 +79,7 @@ AVTPikeCam::AVTPikeCam()
 {
 	m_initialized = false;
 	m_open = false;
-	m_BufferSize = 3;
+	m_BufferSize = 2;
 
 #ifdef __LINUX__
 	m_cam = 0;
@@ -343,6 +343,15 @@ unsigned long AVTPikeCam::Open()
 		return RET_FAILED;
 	}
 
+	err = m_cam.SetParameter(FGP_DMAMODE, DMA_REPLACE);
+	if(err!=FCE_NOERROR)
+	{
+		std::cerr << "WARNING - AVTPikeCam::Open:" << std::endl;
+		std::cerr << "\t [WARNING] Could not set DMA_REPLACE mode '"
+                  << "' ( error " << err << " )" << std::endl;
+		std::cerr << "\t Defaulting to DMA_CONTINUOUS " << std::endl;
+	}
+
 	// Opens, prepares and activates the image capture logic on the PC side
 	err=m_cam.OpenCapture();
 	if(err!=FCE_NOERROR)
@@ -432,7 +441,6 @@ unsigned long AVTPikeCam::Close()
 
 	
 #endif
-	FGExitModule();
 	m_open = false;
 	return RET_OK;
 } 
@@ -688,18 +696,7 @@ unsigned long AVTPikeCam::GetColorImage(char* colorImageData, bool getLatestFram
 	
 	UINT32 err;
 
-	// Release previously acquired m_Frame
-	if (m_Frame.pData != 0)
-	{
-		// Return m_Frame to module
-		err=m_cam.PutFrame(&m_Frame);
-		if(err!=FCE_NOERROR)
-		{
-			std::cerr << "ERROR - AVTPikeCam::GetColorImage:" << std::endl;
-			std::cerr << "\t ... Could not release image buffer ( error " << err << " )" << std::endl;
-			return RET_FAILED;
-		}
-	}
+	
 		
 	if (getLatestFrame)
 	{
@@ -728,13 +725,16 @@ unsigned long AVTPikeCam::GetColorImage(char* colorImageData, bool getLatestFram
 	unsigned char * dst = (unsigned char *)colorImageData;
 	
 	// Convert RGB to BGR
-	int width;
-	int height;
 	ipa_CameraSensors::t_cameraProperty cameraProperty;
 	cameraProperty.propertyID = PROP_CAMERA_RESOLUTION;
-	if (GetProperty(&cameraProperty) & RET_FAILED) return RET_FAILED;
-	width = cameraProperty.cameraResolution.xResolution;
-	height = cameraProperty.cameraResolution.yResolution;
+	if (GetProperty(&cameraProperty) & RET_FAILED) 
+	{
+		std::cerr << "ERROR - AVTPikeCam::GetColorImage:" << std::endl;
+		std::cerr << "\t [ERROR] Reading camera property." << std::endl;
+		return RET_FAILED;
+	}
+	int width = cameraProperty.cameraResolution.xResolution;
+	int height = cameraProperty.cameraResolution.yResolution;
 
 	for (int i=0; i<width*height*3; i+=6) 
 	{
@@ -746,6 +746,19 @@ unsigned long AVTPikeCam::GetColorImage(char* colorImageData, bool getLatestFram
 		dst[i+5] = src[i+3];
 	}
 	
+	// Release previously acquired m_Frame
+	if (m_Frame.pData != 0)
+	{
+		// Return m_Frame to module
+		err=m_cam.PutFrame(&m_Frame);
+		if(err!=FCE_NOERROR)
+		{
+			std::cerr << "ERROR - AVTPikeCam::GetColorImage:" << std::endl;
+			std::cerr << "\t ... Could not release image buffer ( error " << err << " )" << std::endl;
+			return RET_FAILED;
+		}
+	}
+
 	return RET_OK;
 	
 #endif
@@ -760,15 +773,16 @@ unsigned long AVTPikeCam::GetColorImage(cv::Mat* colorImage, bool getLatestFrame
 		return (RET_FAILED | RET_CAMERA_NOT_OPEN);
 	}
 
-	CV_Assert(colorImage != 0);
-
-	int width;
-	int height;
 	ipa_CameraSensors::t_cameraProperty cameraProperty;
 	cameraProperty.propertyID = PROP_CAMERA_RESOLUTION;
-	if (GetProperty(&cameraProperty) & RET_FAILED) return RET_FAILED;
-	width = cameraProperty.cameraResolution.xResolution;
-	height = cameraProperty.cameraResolution.yResolution;
+	if (GetProperty(&cameraProperty) & RET_FAILED) 
+	{
+		std::cerr << "ERROR - AVTPikeCam::GetColorImage:" << std::endl;
+		std::cerr << "\t [ERROR] Reading camera property." << std::endl;
+		return RET_FAILED;
+	}
+	int width = cameraProperty.cameraResolution.xResolution;
+	int height = cameraProperty.cameraResolution.yResolution;
 
 	// Create color image, if necessary
 	colorImage->create(height, width, CV_8UC3);

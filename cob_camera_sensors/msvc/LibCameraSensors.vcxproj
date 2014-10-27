@@ -305,6 +305,7 @@ copy "$(OutDir)$(ProjectName).lib" "$(COB3_DIR)\cob_object_perception_intern\win
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <WholeProgramOptimization>false</WholeProgramOptimization>
       <OmitFramePointers>true</OmitFramePointers>
+      <OpenMPSupport>true</OpenMPSupport>
     </ClCompile>
     <ProjectReference>
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
@@ -319,6 +320,7 @@ copy "$(OutDir)$(ProjectName).lib" "$(COB3_DIR)\cob_object_perception_intern\win
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <DataExecutionPrevention>
       </DataExecutionPrevention>
+      <LinkTimeCodeGeneration>Default</LinkTimeCodeGeneration>
     </Link>
     <PostBuildEvent>
       <Command>copy "$(OutDir)$(ProjectName).dll" "$(COB3_DIR)\cob_object_perception_intern\windows\lib\IPA\$(ProjectName).dll"
