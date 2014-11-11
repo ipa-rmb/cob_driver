@@ -50,7 +50,7 @@
  * If not, see <http://www.gnu.org/licenses/>.
  *
  ****************************************************************/
-#include "../../../../cob_object_perception_intern/windows/src/PreCompiledHeaders/StdAfx.h"
+#include <cob_vision_utils/StdAfx.h>
 
 #ifdef __LINUX__
 #include "cob_camera_sensors/AVTPikeCam.h"
@@ -90,7 +90,7 @@ AVTPikeCam::AVTPikeCam()
 #ifndef __LINUX__
 	m_Frame.pData = 0;
 #endif
- 					
+					
 }
 
 AVTPikeCam::~AVTPikeCam()
@@ -339,7 +339,7 @@ unsigned long AVTPikeCam::Open()
 	{
 		std::cerr << "ERROR - AVTPikeCam::Open:" << std::endl;
 		std::cerr << "\t ... Could not set DMA buffer size to '"<< m_BufferSize 
-                  << "' ( error " << err << " )" << std::endl;
+				  << "' ( error " << err << " )" << std::endl;
 		return RET_FAILED;
 	}
 
@@ -348,7 +348,7 @@ unsigned long AVTPikeCam::Open()
 	{
 		std::cerr << "WARNING - AVTPikeCam::Open:" << std::endl;
 		std::cerr << "\t [WARNING] Could not set DMA_REPLACE mode '"
-                  << "' ( error " << err << " )" << std::endl;
+				  << "' ( error " << err << " )" << std::endl;
 		std::cerr << "\t Defaulting to DMA_CONTINUOUS " << std::endl;
 	}
 
@@ -400,7 +400,7 @@ unsigned long AVTPikeCam::Close()
 	{
 		// Stop transmission
 		dc1394error_t err;
-	    err=dc1394_video_set_transmission(m_cam, DC1394_OFF);                
+		err=dc1394_video_set_transmission(m_cam, DC1394_OFF);                
 		if (err!=DC1394_SUCCESS) 
 		{    
 			std::cerr << "ERROR - AVTPikeCam::Close:" << std::endl;
@@ -408,7 +408,7 @@ unsigned long AVTPikeCam::Close()
 			std::cerr << "\t ... " << dc1394_error_get_string(err) << std::endl;
 			return RET_FAILED;                                         
 		} 
-	    dc1394_capture_stop(m_cam);                                      
+		dc1394_capture_stop(m_cam);                                      
 		dc1394_camera_free(m_cam);
 		m_cam = 0;
 	}
