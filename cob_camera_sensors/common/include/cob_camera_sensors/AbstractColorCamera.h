@@ -59,19 +59,18 @@
 #ifndef __IPA_ABSTRACTCOLORCAMERA_H__
 #define __IPA_ABSTRACTCOLORCAMERA_H__
 
-#include "StdAfx.h"
-
 #ifdef __LINUX__
 	#include "cob_vision_utils/CameraSensorDefines.h"
 	#include "cob_vision_utils/CameraSensorTypes.h"
 #else
-	#include "cob_common/cob_vision_utils/common/include/cob_vision_utils/CameraSensorDefines.h"
-	#include "cob_common/cob_vision_utils/common/include/cob_vision_utils/CameraSensorTypes.h"
+	#include "cob_perception_common/cob_vision_utils/common/include/cob_vision_utils/CameraSensorDefines.h"
+	#include "cob_perception_common/cob_vision_utils/common/include/cob_vision_utils/CameraSensorTypes.h"
 #endif
 
 #include <boost/shared_ptr.hpp>
 #include <sstream>
-#include <opencv/cv.h>
+
+//#include <opencv2/core/core.hpp>
 
 namespace ipa_CameraSensors {
 
@@ -201,6 +200,8 @@ class __DLL_LIBCAMERASENSORS__ AbstractColorCamera
 		/// @param path The camera path
 		/// @return Return code
 		virtual unsigned long SetPathToImages(std::string path) {return RET_OK;};
+
+		virtual unsigned long ResetImages() {return RET_OK;};
 
 		/// Destructor
 		virtual ~AbstractColorCamera();
