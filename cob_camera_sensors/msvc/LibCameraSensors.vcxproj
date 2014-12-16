@@ -217,7 +217,7 @@ copy "$(OutDir)$(ProjectName)D.lib" "$(COB3_DIR)\cob_object_perception_intern\wi
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <ObjectFileName>$(IntDir)</ObjectFileName>
-      <PrecompiledHeaderOutputFile>$(COB3_DIR)\cob_object_perception_intern\windows\pch\PreCompiledHeadersD.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeaderOutputFile>$(COB3_DIR)\cob_object_perception_intern\windows\pch\LibVisionUtilsD.pch</PrecompiledHeaderOutputFile>
       <ProgramDataBaseFileName>$(IntDir)\vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
       <PrecompiledHeaderFile>"cob_vision_utils/StdAfx.h"</PrecompiledHeaderFile>
     </ClCompile>
@@ -238,8 +238,8 @@ copy "$(OutDir)$(ProjectName)D.lib" "$(COB3_DIR)\cob_object_perception_intern\wi
 </Command>
     </PostBuildEvent>
     <PreBuildEvent>
-      <Command>xcopy /D /Y "$(SolutionDir)PreCompiledHeaders$(Configuration)\vc$(PlatformToolsetVersion).pdb" ".\$(IntDir)"</Command>
-      <Message>Copying program databas file from PreCompiledHeaders.vcxproj project</Message>
+      <Command>xcopy /D /Y "$(SolutionDir)LibVisionUtils$(Configuration)\vc$(PlatformToolsetVersion).pdb" ".\$(IntDir)"</Command>
+      <Message>Copying program databas file from LibVisionUtils.vcxproj project</Message>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -296,7 +296,7 @@ copy "$(OutDir)$(ProjectName).lib" "$(COB3_DIR)\cob_object_perception_intern\win
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <PrecompiledHeaderFile>"cob_vision_utils/StdAfx.h"</PrecompiledHeaderFile>
       <ObjectFileName>$(IntDir)</ObjectFileName>
-      <PrecompiledHeaderOutputFile>$(COB3_DIR)\cob_object_perception_intern\windows\pch\PreCompiledHeaders.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeaderOutputFile>$(COB3_DIR)\cob_object_perception_intern\windows\pch\LibVisionUtils.pch</PrecompiledHeaderOutputFile>
       <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
@@ -325,8 +325,8 @@ copy "$(OutDir)$(ProjectName).lib" "$(COB3_DIR)\cob_object_perception_intern\win
 </Command>
     </PostBuildEvent>
     <PreBuildEvent>
-      <Command>xcopy /D /Y "$(SolutionDir)PreCompiledHeaders$(Configuration)\vc$(PlatformToolsetVersion).pdb" ".\$(IntDir)"</Command>
-      <Message>Copying program databas file from PreCompiledHeaders.vcxproj project</Message>
+      <Command>xcopy /D /Y "$(SolutionDir)LibVisionUtils$(Configuration)\vc$(PlatformToolsetVersion).pdb" ".\$(IntDir)"</Command>
+      <Message>Copying program databas file from LibVisionUtils.vcxproj project</Message>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -338,7 +338,7 @@ copy "$(OutDir)$(ProjectName).lib" "$(COB3_DIR)\cob_object_perception_intern\win
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\..\cob_driver\cob_camera_sensors\common\src\VirtualColorCam.cpp"  />
+    <ClCompile Include="..\..\..\cob_driver\cob_camera_sensors\common\src\VirtualColorCam.cpp" />
     <ClCompile Include="..\..\..\cob_driver\cob_camera_sensors\common\src\VirtualRangeCam.cpp" />
     <ClCompile Include="..\..\..\cob_bringup_sandbox\cob_camera_sensors_ipa\common\src\AxisCamVFeld.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
