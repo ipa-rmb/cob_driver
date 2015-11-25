@@ -49,6 +49,9 @@
     <ClCompile Include="..\..\..\cob_bringup_sandbox\cob_camera_sensors_ipa\common\src\PMDCamCube.cpp">
       <Filter>cob_camera_sensors_ipa</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\cob_bringup_sandbox\cob_camera_sensors_ipa\common\src\EnsensoN30.cpp">
+      <Filter>cob_camera_sensors_ipa</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\cob_object_perception_intern\windows\src\extern\MemJpegDecoder\memJpegDecoder.h">
@@ -103,6 +106,9 @@
       <Filter>cob_camera_sensors_ipa</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\cob_bringup_sandbox\cob_camera_sensors_ipa\common\include\cob_camera_sensors_ipa\PMDCamCube.h">
+      <Filter>cob_camera_sensors_ipa</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\cob_bringup_sandbox\cob_camera_sensors_ipa\common\include\cob_camera_sensors_ipa\EnsensoN30.h">
       <Filter>cob_camera_sensors_ipa</Filter>
     </ClInclude>
   </ItemGroup>
