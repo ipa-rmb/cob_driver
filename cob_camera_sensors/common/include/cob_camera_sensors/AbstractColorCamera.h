@@ -237,6 +237,7 @@ __DLL_LIBCAMERASENSORS__ AbstractColorCameraPtr CreateColorCamera_ICCam();
 __DLL_LIBCAMERASENSORS__ AbstractColorCameraPtr CreateColorCamera_AxisCam();
 __DLL_LIBCAMERASENSORS__ AbstractColorCameraPtr CreateColorCamera_AVTPikeCam();
 __DLL_LIBCAMERASENSORS__ AbstractColorCameraPtr CreateColorCamera_OpenCVCamera();
+__DLL_LIBCAMERASENSORS__ AbstractColorCameraPtr CreateColorCamera_IDSuEyeCamera();
 
 
 } // end namespace
