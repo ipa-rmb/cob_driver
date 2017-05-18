@@ -102,6 +102,7 @@
     <Import Project="..\..\..\cob_object_perception_intern\windows\property_sheets\idsueye-vc100-x64.props" />
     <Import Project="..\..\..\cob_object_perception_intern\windows\property_sheets\ensenso-vc100-x64.props" />
     <Import Project="..\..\..\cob_object_perception_intern\windows\property_sheets\softkinetic-vc100-x64.props" />
+    <Import Project="..\..\..\cob_object_perception_intern\windows\property_sheets\avtpike-vc100-x64.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -291,7 +292,7 @@ copy "$(OutDir)$(ProjectName).lib" "$(COB3_DIR)\cob_object_perception_intern\win
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <AdditionalIncludeDirectories>$(OPENNI2_INCLUDE64);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_WIN64;_WIN32;NDEBUG;__LIBCAMERASENSORS_EXPORT__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WIN64;_WIN32;NDEBUG;__LIBCAMERASENSORS_EXPORT__;__BUILD_WITH_AVTPIKECAM__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
       <PrecompiledHeader>Use</PrecompiledHeader>
